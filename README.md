@@ -1,6 +1,8 @@
-# moodle
-The perfect Moodle
+# MOODLE 3.9+ Ubuntu 20
+The perfect Moodle, by Rene Solis
 
+
+# MAX SIZE para respaldos arriba de 300Mb
 ```bash
 sudo apt -f install
 sudo dpkg --configure -a
