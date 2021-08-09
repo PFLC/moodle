@@ -172,47 +172,6 @@ http://localhost/moodle/cache/admin.php
 
 
 
-# GoogleChrome for Linux and the MAX SIZE for backups upper from 300Mb
-```bash
-cd
-sudo apt -f install
-sudo dpkg --configure -a
-sudo apt -f install
-sudo apt-get install gdebi-core -y 
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
-sudo gdebi google-chrome-stable_current_amd64.deb 
-sudo gedit /usr/share/applications/google-chrome.desktop  
-
-# RESTAURACION DE CURSOS MUY GRANDES OBSERVACIONES
-ECHO
-ECHO /// MAX SIZE para respaldos arriba de 300Mb ///
-ECHO https://docs.moodle.org/310/en/File_upload_size
-ECHO
-nano /etc/php/7.4/apache2/php.ini 
-ECHO MODIFICAR:"post_max_size" 1Gb,  "upload_max_filesize" 1GB, "max_execution_time" a 600
-service apache2 restart 
-ECHO /// restart Mysql5 ///
-nano  /etc/mysql/mysql.conf.d/mysqld.cnf 
-ECHO MODIFICAR: max_allowed_packet      = 100M
-service mysql restart
-```
-
-# DIRECTORIES
-```bash
-ECHO MOODLEDATA:
-chmod -R 0770 moodledata/
-chown -R nobody:apache moodledata
-ECHO Instalar Pluggins:
-chmod -R 0777 moodle
-ECHO exit
-chmod -R 0755 /var/www/html/moodle
-```
-
-# CRON Cli
-```
-CRON CLI
-/usr/bin/php  /var/www/html/moodle/admin/cli/cron.php
-```
 # INSTALACION VIA COMMMAND LINE
 ```
 /usr/bin/php /var/www/html/moodle/admin/cli/install
@@ -323,10 +282,53 @@ escriba s (sí) o n (no)
 -->logstore_standard
 ++ Éxito ++
 ....
+La instalación se completo exitosamente.
+
+
+-----
+
+# RESTAURACION DE CURSOS MUY GRANDES OBSERVACIONES
+ECHO
+ECHO /// MAX SIZE para respaldos arriba de 300Mb ///
+ECHO https://docs.moodle.org/310/en/File_upload_size
+ECHO
+nano /etc/php/7.4/apache2/php.ini 
+ECHO MODIFICAR:"post_max_size" 1Gb,  "upload_max_filesize" 1GB, "max_execution_time" a 600
+service apache2 restart 
+ECHO /// restart Mysql5 ///
+nano  /etc/mysql/mysql.conf.d/mysqld.cnf 
+ECHO MODIFICAR: max_allowed_packet      = 100M
+service mysql restart
+```
+# CRON Cli
+```
+CRON CLI
+/usr/bin/php  /var/www/html/moodle/admin/cli/cron.php
+```
+
+# GoogleChrome for Linux 
+```bash
+cd
+sudo apt -f install
+sudo dpkg --configure -a
+sudo apt -f install
+sudo apt-get install gdebi-core -y 
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
+sudo gdebi google-chrome-stable_current_amd64.deb 
+sudo gedit /usr/share/applications/google-chrome.desktop  
 
 
 
-
+# DIRECTORIES
+```bash
+ECHO MOODLEDATA:
+chmod -R 0770 moodledata/
+chown -R nobody:apache moodledata
+ECHO Instalar Pluggins:
+chmod -R 0777 moodle
+ECHO exit
+chmod -R 0755 /var/www/html/moodle
+```
 
 
 
