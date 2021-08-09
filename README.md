@@ -213,6 +213,126 @@ chmod -R 0755 /var/www/html/moodle
 CRON CLI
 /usr/bin/php  /var/www/html/moodle/admin/cli/cron.php
 ```
+# INSTALACION VIA COMMMAND LINE
+```
+/usr/bin/php /var/www/html/moodle/admin/cli/install
+*/*/*/
+.-.       
+   _____                         | || |       
+  /____/-.---_  .---.  .---.  .-.| || | .---. 
+  | |  _   _  |/  _  \/  _  \/  _  || |/  __ \
+  * | | | | | || |_| || |_| || |_| || || |___/
+    |_| |_| |_|\_____/\_____/\_____||_|\_____)
+
+Moodle 3.9.9+ (Build: 20210805) command line installation program
+-------------------------------------------------------------------------------
+== Choose a language ==
+en - English (en)
+? - Available language packs
+type value, press Enter to use default value (en)
+: es_mx
+-------------------------------------------------------------------------------
+== Permiso directorios de datos ==
+valor del tipo, pulse Enter para utilizar el valor por defecto (2777)
+: 
+-------------------------------------------------------------------------------
+== Dirección Web ==
+valor del tipo
+: http://aula.lazarocardenas.edu.mx/moodle
+-------------------------------------------------------------------------------
+== Directorio de Datos ==
+valor del tipo, pulse Enter para utilizar el valor por defecto (/var/www/moodledata)
+: /var/www/XXXXXXXXXXmysql
+-------------------------------------------------------------------------------
+== Seleccione el controlador de la base de datos ==
+ mysqli 
+ auroramysql 
+ mariadb 
+valor del tipo, pulse Enter para utilizar el valor por defecto (mysqli)
+: (ENTER)
+== host de la Base de Datos ==
+valor del tipo, pulse Enter para utilizar el valor por defecto (localhost)
+: 
+-------------------------------------------------------------------------------
+== Nombre de la base de datos ==
+valor del tipo, pulse Enter para utilizar el valor por defecto (moodle)
+: aula21
+-------------------------------------------------------------------------------
+== Prefijo de tablas ==
+valor del tipo, pulse Enter para utilizar el valor por defecto (mdl_)
+: 
+-------------------------------------------------------------------------------
+== Puerto de BasedeDatos ==
+valor del tipo, pulse Enter para utilizar el valor por defecto ()
+: 
+-------------------------------------------------------------------------------
+== Socket Unix ==
+valor del tipo, pulse Enter para utilizar el valor por defecto ()
+: 
+-------------------------------------------------------------------------------
+== Usuario de la base de datos ==
+valor del tipo, pulse Enter para utilizar el valor por defecto (root)
+: XXXXXX
+-------------------------------------------------------------------------------
+== Contraseña de la base de datos ==
+valor del tipo
+: XXXXX
+-------------------------------------------------------------------------------
+== Nombre completo del sitio ==
+valor del tipo
+: PFLC
+== Nombre_de_usuario de la cuenta del administrador ==
+valor del tipo, pulse Enter para utilizar el valor por defecto (admin)
+: XXXXXXXXXXXXXXx
+-------------------------------------------------------------------------------
+== Nueva contraseña de usuario admin ==
+valor del tipo
+: XXXXXXXXXXXXXXX
+-------------------------------------------------------------------------------
+== Nuevas direcciones Email de usuario administrador ==
+valor del tipo, pulse Enter para utilizar el valor por defecto ()
+: XXXXXXXXXXXXXXXXx
+-------------------------------------------------------------------------------
+== Clave para actualización (dejar vacía para no configurarla) ==
+valor del tipo
+: 
+-------------------------------------------------------------------------------
+== Copyright ==
+Moodle  - Modular Object-Oriented Dynamic Learning Environment
+Copyright (C) 1999 en adelante, Martin Dougiamas (http://moodle.com)
+
+Este programa es software libre: usted puede redistribuirlo y /o modificarlo bajo los términos de la Licencia Pública General GNU (GNU General Public License) publicada por la Fundación para el Software Libre, ya sea la versión 3 de dicha Licencia, o (a su elección) cualquier versión posterior.
+
+Este programa se distribuye con la esperanza de que sea útil, pero SIN NINGUNA GARANTÍA; incluso sin la garantía implícita de COMERCIALIZACIÓN o IDONEIDAD PARA UN PROPÓSITO PARTICULAR.
+
+Vea la página de información de Licencia de Moodle para más detalles: https://docs.moodle.org/en/License
+
+¿Ha leído y comprendido los términos y condiciones?
+escriba s (sí) o n (no)
+: s
+
+.....
+->tinymce_spellchecker
+++ Éxito ++
+-->tinymce_wrap
+++ Éxito ++
+-->logstore_database
+++ Éxito ++
+-->logstore_legacy
+++ Éxito ++
+-->logstore_standard
+++ Éxito ++
+....
+
+
+
+
+
+
+
+
+
+
 
 # ERRORS from MoodleData Cache Purge
 Si purgamos el cache, no correr el script, mejor DIRECTAMENTE borrar "cache" moddledata, marca errores aveces
