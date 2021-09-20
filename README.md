@@ -321,8 +321,8 @@ sudo gedit /usr/share/applications/google-chrome.desktop
 ```bash
 ECHO MOODLEDATA:
  chown -R www-data:www-data moodledata/
-chmod -R 0770 moodledata/
-chown -R nobody:apache moodledata
+-----chmod -R 0770 moodledata/
+-----chown -R nobody:apache moodledata
 
 
 ECHO Instalar Pluggins:
