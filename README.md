@@ -286,7 +286,7 @@ La instalación se completo exitosamente.
 
 
 -----
-
+```bash
 # RESTAURACION DE CURSOS MUY GRANDES OBSERVACIONES
 ECHO
 ECHO /// MAX SIZE para respaldos arriba de 300Mb ///
@@ -299,9 +299,7 @@ ECHO /// restart Mysql5 ///
 nano  /etc/mysql/mysql.conf.d/mysqld.cnf 
 ECHO MODIFICAR: max_allowed_packet      = 100M
 service mysql restart
-```
 # CRON Cli
-```
 CRON CLI
 /usr/bin/php  /var/www/html/moodle/admin/cli/cron.php
 ```
@@ -316,7 +314,7 @@ sudo apt-get install gdebi-core -y
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
 sudo gdebi google-chrome-stable_current_amd64.deb 
 sudo gedit /usr/share/applications/google-chrome.desktop  
-
+```
 
 
 # DIRECTORIES
@@ -329,12 +327,6 @@ chmod -R 0777 moodle
 ECHO exit
 chmod -R 0755 /var/www/html/moodle
 ```
-
-
-
-
-
-
 
 # ERRORS from MoodleData Cache Purge
 Si purgamos el cache, no correr el script, mejor DIRECTAMENTE borrar "cache" moddledata, marca errores aveces
