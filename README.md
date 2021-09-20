@@ -317,13 +317,17 @@ sudo gedit /usr/share/applications/google-chrome.desktop
 ```
 
 
-# DIRECTORIES
+# PERMISOS
 ```bash
 ECHO MOODLEDATA:
+ chown -R www-data:www-data moodledata/
 chmod -R 0770 moodledata/
 chown -R nobody:apache moodledata
+
+
 ECHO Instalar Pluggins:
 chmod -R 0777 moodle
+
 ECHO exit
 chmod -R 0755 /var/www/html/moodle
 ```
