@@ -334,3 +334,17 @@ chmod -R 0755 /var/www/html/moodle
 
 # ERRORS from MoodleData Cache Purge
 Si purgamos el cache, no correr el script, mejor DIRECTAMENTE borrar "cache" moddledata, marca errores aveces
+
+# Purge caches
+You can purge caches using this script:
+```
+ php admin/cli/purge_caches.php
+ ```
+# Kill all sessions
+If needed for administrative reasons, you can kill all user sessions using this script:
+```
+php admin/cli/kill_all_sessions.php
+```
+As a result, all users will be logged out from Moodle.
+
+
