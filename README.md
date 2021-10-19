@@ -347,4 +347,8 @@ php admin/cli/kill_all_sessions.php
 ```
 As a result, all users will be logged out from Moodle.
 
-
+# Reset user password
+If you happen to forget your admin password (or you want to set a password for any other user on the site), you can use reset_password.php script. The script sets the correctly salted password for the given user.
+```
+   $ sudo -u apache /usr/bin/php admin/cli/reset_password.php
+   ```
