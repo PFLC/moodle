@@ -352,3 +352,18 @@ If you happen to forget your admin password (or you want to set a password for a
 ```
    $ sudo -u apache /usr/bin/php admin/cli/reset_password.php
    ```
+----
+# Maintenance mode
+To switch your site into the maintenance mode via CLI, you can use
+```
+   $ sudo -u apache /usr/bin/php admin/cli/maintenance.php --enable
+```
+To turn maintenance mode off, execute the same script with the **--disable** parameter:
+```
+   $ sudo -u apache /usr/bin/php admin/cli/maintenance.php --disable
+```
+If you don't want to enable maintenance mode immediately, but show a countdown to your users, execute the same script with the **--enablelater** parameter and the **number of minutes which the countdown** should run:
+```
+   $ sudo -u apache /usr/bin/php admin/cli/maintenance.php --enablelater=10
+```
+This script will also create and remove the climaintenance.html file for "Offline" mode.
