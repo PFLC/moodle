@@ -319,10 +319,10 @@ sudo gedit /usr/share/applications/google-chrome.desktop
 
 # PERMISOS
 ```bash
-ECHO MOODLEDATA:
- chown -R www-data:www-data moodledata/
------chmod -R 0770 moodledata/
------chown -R nobody:apache moodledata
+ECHO Moodledata segun: https://docs.moodle.org/311/en/Step-by-step_Installation_Guide_for_Ubuntu
+sudo mkdir moodledata
+sudo chown -R www-data:www-data moodledata/
+sudo chmod -R 777 moodledata
 
 
 ECHO Instalar Pluggins:
@@ -367,3 +367,6 @@ If you don't want to enable maintenance mode immediately, but show a countdown t
    $ sudo -u apache /usr/bin/php admin/cli/maintenance.php --enablelater=10
 ```
 This script will also create and remove the climaintenance.html file for "Offline" mode.
+
+# Schedule Tasks
+php admin/cli/scheduled_task.php --list
