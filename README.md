@@ -54,7 +54,7 @@ sudo mysql -u root -p
 CREATE DATABASE ponernombre DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 use ponernombre;
 CREATE USER 'ponernombre'@'%' IDENTIFIED BY 'Escuelita123';
-GRANT ALL PRIVILEGES ON ponernombre.* TO 'ponernombre'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON basededatos.* TO 'ponernombre'@'%' WITH GRANT OPTION;
 flush privileges;
 quit
 ```
@@ -83,7 +83,10 @@ crontab -u www-data -e
 
  * * * * * /usr/bin/php  /var/www/html/moodle/admin/cli/adhoc_task.php --execute --keep-alive=59 >/dev/null
 ```
-
+_Moodle 4 pide un cambio en PHP se dice "max_input_vars=5000"
+```
+nano sudo nano /etc/php/7.4/apache2/php.ini 
+```
 
 __UNOCOV para Editar PDF__
 ```
