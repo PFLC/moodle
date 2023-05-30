@@ -337,6 +337,7 @@ chmod -R 0755 /var/www/html/moodle
 
 # ERRORS from MoodleData Cache Purge
 Si purgamos el cache, no correr el script, mejor DIRECTAMENTE borrar "cache" moddledata, marca errores aveces
+el problema es que se genera adentro un .php que ocupa permisos $chmod 777 -R (todo el directorio de moodledata)
 
 # Purge caches
 You can purge caches using this script:
