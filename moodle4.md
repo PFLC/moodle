@@ -1,4 +1,23 @@
-# MOODLE  4 Ubuntu 22
+# MOODLE  4 Almalinux 9.2
+# Acutalizar la instalacion de 9Gb USB Bootable
+```bash
+dnf update -y
+
+echo "Instalacion de REDIS / Memcache"
+
+sudo systemctl start redis
+sudo systemctl enable redis
+
+
+```
+TODO
+https://www.howtoforge.com/redis-made-easy-a-step-by-step-guide-to-installing-on-almalinux-9/
+
+
+
+
+
+
 https://www.howtoforge.com/how-to-install-moodle-on-ubuntu-22-04/
 
 
