@@ -212,6 +212,9 @@ server {
 	}
 }
 
+//////////////////
+sudo nginx -t
+
 ````
 
 https://www.howtoforge.com/how-to-install-moodle-on-ubuntu-22-04/
