@@ -1,21 +1,47 @@
 # MOODLE  4 Almalinux 9.2
-# Acutalizar la instalacion de 9Gb USB Bootable
+# Parcialmente basado en https://www.howtoforge.com/how-to-install-moodle-elearning-platform-on-rocky-linux-8/
+# Se corrige el php8.1 a 8.0 otro tutorial
+
+# Actualizar la instalacion de 9Gb USB Bootable
 ```bash
 dnf update -y
+sudo dnf install wget curl nano unzip yum-utils git -y
+echo "Checar el Firewall e instalar herramienta GUI de Firewall poner EXTERNO como default HTTP/HTTPS"
+sudo firewall-cmd --state
+sudo firewall-cmd --permanent --list-services
 
 echo "Instalacion de REDIS / Memcache"
-
 sudo systemctl start redis
 sudo systemctl enable redis
-
-
 ```
 TODO
 https://www.howtoforge.com/redis-made-easy-a-step-by-step-guide-to-installing-on-almalinux-9/
 
+# Install and Configure PHP verson 8.0 (ver moodle.org soporte php) AlmaLinux trae 8.1 no compatible
+#  Installing the EPEL and Remi Repository, For this, we use the PHP 7.4 and 8.1 packaged by Remi,
+# First, let us install the EPEL repository, UPSCALE 9.0 then select 8.0
+```bash
+
+dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+dnf module list php
+dnf module install php:remi-8.0
+dnf update
+php -v
+
+echo "The default version is 8.1. Enable Remi's PHP 8.0 repository." 
+sudo dnf module reset php -y
+sudo dnf module enable php:remi-8.0
+
+```
+# Instalar complementos 350Mb de php8 pero falla ASPELL
+
+```bash
+sudo dnf install graphviz  ghostscript clamav php-fpm php-iconv php-curl php-mysqlnd php-cli php-mbstring php-xmlrpc php-soap php-zip php-gd php-xml php-intl php-json php-sodium php-opcache
 
 
 
+```
 
 
 https://www.howtoforge.com/how-to-install-moodle-on-ubuntu-22-04/
