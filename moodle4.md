@@ -39,10 +39,180 @@ sudo dnf module enable php:remi-8.0
 ```bash
 sudo dnf install graphviz  ghostscript clamav php-fpm php-iconv php-curl php-mysqlnd php-cli php-mbstring php-xmlrpc php-soap php-zip php-gd php-xml php-intl php-json php-sodium php-opcache
 
-
+echo "Install ASPELL" via https://almalinux.pkgs.org/9/almalinux-crb-x86_64/aspell-0.60.8-8.el9.x86_64.rpm.html
+dnf --enablerepo=crb install aspell
 
 ```
 
+# Modificar PHP.ini 256M para subir respaldos
+```bash
+sudo nano /etc/php.ini
+    upload_max_filesize = 256M
+    post_max_size = 256M
+    max_input_vars = 5000
+
+sudo nano /etc/php-fpm.d/www.conf
+    ; Unix user/group of processes
+    ; RPM: apache user chosen to provide access to the same directories as httpd
+     user = nginx
+     ; RPM: Keep a group allowed to write in log dir.
+     group = ngix
+     ...
+     listen.owner = nginx
+     listen.group = nginx
+     listen.mode = 0660
+     //Comentar//
+      ;listen.acl_users = apache,nginx
+      
+echo "PHP permisos y servicios"
+chown -R nginx:nginx /var/lib/php/session/
+sudo systemctl enable php-fpm --now
+
+```
+# Instalar MYSQL
+```bash
+sudo dnf install mysql-server
+mysql --version
+sudo systemctl enable mysqld --now
+sudo mysql_secure_installation
+
+     Please enter 0 = LOW, 1 = MEDIUM and 2 = STRONG: (Type 2) PONER TIPO 2...
+     ....
+     Poner contrasena dificil y darle como 5 "y"
+
+sudo mysql -p
+ mysql > CREATE DATABASE moodledb DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ mysql >create user 'moodleuser'@'localhost' IDENTIFIED BY '......passwrod....';
+ mysql >GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON moodledb.* TO 'moodleuser'@'localhost';
+ mysql > FLUSH PRIVILEGES;
+ mysql >exit
+```
+
+# Instalar ngix web server
+```bash
+sudo nano /etc/yum.repos.d/nginx.repo
+/////////
+[nginx-stable]
+name=nginx stable repo
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=1
+enabled=1
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=true
+
+[nginx-mainline]
+name=nginx mainline repo
+baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=true
+///////// Salvar y salir/////
+
+sudo dnf install nginx
+nginx -v
+
+sudo mkdir /var/www/html/moodle
+sudo chown -R $USER:$USER /var/www/html/moodle
+cd /var/www/html/moodle
+git clone https://github.com/moodle/moodle.git .
+git branch -a
+git branch --track MOODLE_402_STABLE origin/MOODLE_402_STABLE
+git checkout MOODLE_402_STABLE
+sudo mkdir /var/moodledata
+sudo chown -R nginx /var/moodledata
+sudo chmod -R 775 /var/moodledata
+sudo chmod -R 755 /var/www/html/moodle
+echo "Configurar"
+cd /var/www/html/moodle
+cp config-dist.php config.php
+
+```
+
+# Certificado
+```bash
+sudo certbot certonly --standalone --agree-tos --no-eff-email --staple-ocsp --preferred-challenges http -m moodle@aula.lazarocardenas.edu.mx -d aula.lazarocardenas.edu.mx
+
+echo "The above command will download a certificate to the /etc/letsencrypt/live/moodle.example.com directory on your server. "
+
+echo "Generate a Diffie-Hellman group certificate. "
+sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
+sudo mkdir -p /var/lib/letsencrypt
+sudo nano /etc/cron.daily/certbot-renew
+   #!/bin/sh
+   certbot renew --cert-name aula.lazarocardenas.edu.mx --webroot -w /var/lib/letsencrypt/ --post-hook "systemctl reload nginx"
+
+sudo chmod +x /etc/cron.daily/certbot-renew
+
+```
+
+# Configurar Nginx
+````
+sudo nano /etc/nginx/conf.d/moodle.conf
+````
+# Redirect all non-encrypted to encrypted
+````
+server {
+    listen 80;
+    listen [::]:80;
+    server_name aula.lazarocardenas.edu.mx;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    
+    server_name aula.lazarocardenas.edu.mx;
+    root   /var/www/html/moodle;
+    index  index.php;
+
+    ssl_certificate     /etc/letsencrypt/live/aula.lazarocardenas.edu.mx/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/aula.lazarocardenas.edu.mx/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/aula.lazarocardenas.edu.mx/chain.pem;
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:MozSSL:10m;
+    ssl_session_tickets off;
+    ssl_stapling on;
+    ssl_stapling_verify on;
+    ssl_dhparam /etc/ssl/certs/dhparam.pem;
+    
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
+
+    access_log /var/log/nginx/moodle.access.log main;
+    error_log  /var/log/nginx/moodle.error.log;
+    
+    client_max_body_size 25M;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    
+    location ~ ^(.+\.php)(.*)$ {
+        fastcgi_split_path_info ^(.+\.php)(.*)$;
+        fastcgi_index index.php;
+        fastcgi_pass unix:/run/php-fpm/www.sock;
+        include /etc/nginx/mime.types;
+        include fastcgi_params;
+        fastcgi_param  PATH_INFO  $fastcgi_path_info;
+        fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+    
+    # Hide all dot files but allow "Well-Known URIs" as per RFC 5785
+	location ~ /\.(?!well-known).* {
+    	return 404;
+	}
+ 
+	# This should be after the php fpm rule and very close to the last nginx ruleset.
+	# Don't allow direct access to various internal files. See MDL-69333
+	location ~ (/vendor/|/node_modules/|composer\.json|/readme|/README|readme\.txt|/upgrade\.txt|db/install\.xml|/fixtures/|/behat/|phpunit\.xml|\.lock|environment\.xml) {
+     	deny all;
+	    return 404;
+	}
+}
+
+````
 
 https://www.howtoforge.com/how-to-install-moodle-on-ubuntu-22-04/
 
