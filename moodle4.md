@@ -131,11 +131,10 @@ cp config-dist.php config.php
 
 # Certificado
 ```bash
+echo "Debe estar apagado todo webserver"
 sudo certbot certonly --standalone --agree-tos --no-eff-email --staple-ocsp --preferred-challenges http -m moodle@aula.lazarocardenas.edu.mx -d aula.lazarocardenas.edu.mx
 
-echo "The above command will download a certificate to the /etc/letsencrypt/live/moodle.example.com directory on your server. "
-
-echo "Generate a Diffie-Hellman group certificate. "
+echo "The above command will download a certificate to the /etc/letsencrypt/live/aula.lazarocardenas.edu.mx directory on your server. Generate a Diffie-Hellman group certificate. "
 sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
 sudo mkdir -p /var/lib/letsencrypt
 sudo nano /etc/cron.daily/certbot-renew
