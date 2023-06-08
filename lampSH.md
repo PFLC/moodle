@@ -1,9 +1,10 @@
 # Se aplica TeddySUN LAMPSERVER para Rocky Linux 9
 ```
 - Habilitar SODIUM  extensiones de php
+- PHP 8
 ```
 
-# Con PHP8
+# Basado parcialmente en https://idroot.us/install-moodle-rocky-linux-9/
 
 ```
 cd /tmp
