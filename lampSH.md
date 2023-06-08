@@ -1,4 +1,4 @@
-# Se aplica TeddySUN LAMPSERVER para Rocky Linux X
+# Se aplica TeddySUN LAMPSERVER para Rocky Linux 9
 ```
 - Habilitar SODIUM  extensiones de php
 ```
@@ -44,6 +44,18 @@ sudo mysql -p
   exit;
    
  ```
+  ```
+ Apache: 
+Default Website: http://187.191.62.164
+Web root location 	/data/www/default
+Database: mysql-8
+MySQL Location: /usr/local/mysql
+MySQL Data Location: /usr/local/mysql/data
+MySQL Root Password: ***
+```
+
+------- Pendiente
+ 
  # Instalar Moodle 4.2 via https://www.howtoforge.com/how-to-install-moodle-elearning-platform-on-rocky-linux-8/
  ```
  sudo mkdir /data/www/default/moodle
@@ -56,12 +68,4 @@ git checkout MOODLE_402_STABLE
 sudo mkdir /data/www/moodledata23
 sudo chmod -R 775 /data/www/moodledata
 ----DUDA -----sudo chmod -R apache /data/www/moodledata
- ```
- Apache: 
-Default Website: http://187.191.62.164
-Web root location 	/data/www/default
-Database: mysql-8
-MySQL Location: /usr/local/mysql
-MySQL Data Location: /usr/local/mysql/data
-MySQL Root Password: ***
-```
+
