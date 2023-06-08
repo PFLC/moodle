@@ -30,15 +30,38 @@ date.timezone = UTC
     upload_max_filesize = 256M
     post_max_size = 256M
     max_input_vars = 5000 (SE AGREGA)
+        
 ```
 
 # Mysql crear dB y usuario
 ```
 sudo mysql -p
- mysql > CREATE DATABASE moodledb DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
- mysql >create user 'moodleuser'@'localhost' IDENTIFIED BY '......passwrod....';
- mysql >GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON moodledb.* TO 'moodleuser'@'localhost';
- mysql > FLUSH PRIVILEGES;
- mysql >exit
+
+   CREATE DATABASE moodledb DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+    create user 'moodleuser'@'localhost' IDENTIFIED BY 'YourPassword23!';
+    GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON moodledb.* TO 'moodleuser'@'localhost';
+  FLUSH PRIVILEGES;
+  exit;
+   
  ```
- 
+ # Instalar Moodle 4.2 via https://www.howtoforge.com/how-to-install-moodle-elearning-platform-on-rocky-linux-8/
+ ```
+ sudo mkdir /data/www/default/moodle
+ sudo chown -R $USER:$USER /data/www/default/moodle
+ cd /data/www/default/moodle
+ git clone https://github.com/moodle/moodle.git .
+git branch -a 
+git branch --track MOODLE_400_STABLE origin/MOODLE_402_STABLE
+git checkout MOODLE_402_STABLE
+sudo mkdir /data/www/moodledata23
+sudo chmod -R 775 /data/www/moodledata
+----DUDA -----sudo chmod -R apache /data/www/moodledata
+ ```
+ Apache: 
+Default Website: http://187.191.62.164
+Web root location 	/data/www/default
+Database: mysql-8
+MySQL Location: /usr/local/mysql
+MySQL Data Location: /usr/local/mysql/data
+MySQL Root Password: ***
+```
