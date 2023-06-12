@@ -21,7 +21,9 @@ sudo chmod -R 777 /data/www/default/moodle
 cd /data/www/default
 
 crontab -u apache -e
-    * * * * * /usr/bin/php  /data/www/default/moodle/admin/cli/adhoc_task.php --execute --keep-alive=59 >/dev/null
+ * * * * * /usr/bin/php  /data/www/default/moodle/admin/cli/adhoc_task.php --execute --keep-alive=59 >/dev/null
+ * * * * * /usr/bin/php  /data/www/default/moodle/admin/cli/cron.php --execute --keep-alive=59 >/dev/null
+
 ```
 
 # Modificaciones en PHP.ini
@@ -77,4 +79,24 @@ git checkout MOODLE_402_STABLE
 sudo mkdir /data/www/moodledata23
 sudo chmod -R 775 /data/www/moodledata
 ----DUDA -----sudo chmod -R apache /data/www/moodledata
+
+
+# DOCKER
+# Basado en https://docs.rockylinux.org/gemstones/docker/
+sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo dnf -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo systemctl --now enable docker
+
+
+------
+# HTOP para monitoreo de recursos
+# Installation epel source (also called repository)
+```
+sudo dnf -y install epel-release
+# Generate cache
+sudo dnf makecache
+# Install htop
+sudo dnf -y install htop
+```
+
 
