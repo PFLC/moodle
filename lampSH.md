@@ -21,8 +21,8 @@ sudo chmod -R 777 /data/www/default/moodle
 cd /data/www/default
 
 crontab -u apache -e
- * * * * * /usr/bin/php  /data/www/default/moodle/admin/cli/adhoc_task.php --execute --keep-alive=59 >/dev/null
- * * * * * /usr/bin/php  /data/www/default/moodle/admin/cli/cron.php --execute --keep-alive=59 >/dev/null
+* * * * * /usr/bin/php /data/www/default/moodle/admin/cli/adhoc_task.php --execute --keep-alive=59 >/dev/null 2>&1
+*/15 * * * * /usr/bin/php  /data/www/default/moodle/admin/cli/cron.php  >/dev/null 2>&1
 
 ```
 
