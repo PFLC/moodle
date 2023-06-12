@@ -65,6 +65,42 @@ nano prueba.txt
 unoconv -f pdf prueba.txt
 ls
 ```
+
+# Install ClamAV on Rocky Linux 9
+```
+sudo dnf check-update
+sudo dnf install dnf-utils
+sudo dnf install epel-release
+sudo dnf install clamav clamd clamav-update
+sudo setsebool -P antivirus_can_scan_system 1
+sudo freshclam
+sudo systemctl start clamav-freshclam
+sudo systemctl status clamav-freshclam
+
+
+
+```
+
+# REDIS via https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-rocky-linux-9
+```
+sudo dnf install redis nano
+echo "passworddeREDIS" | sha1sum
+sudo nano /etc/redis/redis.conf
+    supervised systemd
+    requirepass PONERPASSWORD
+sudo systemctl start redis.service
+sudo systemctl enable redis
+redis-cli ping
+  Output
+  PONG
+sudo systemctl restart redis
+redis-cli
+   auth  PONERPASSWORD
+   set key1 10
+   get key1
+   quit
+
+  
 ------- Pendiente
  
  # Instalar Moodle 4.2 via https://www.howtoforge.com/how-to-install-moodle-elearning-platform-on-rocky-linux-8/
