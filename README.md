@@ -80,8 +80,9 @@ cd /var/www/html
 __CRONTAB mantenimiento del script__
 ```
 crontab -u www-data -e
+*/15 * * * *  /usr/bin/php  /data/www/default/moodle/admin/cli/cron.php >/dev/null 2>&1
+* * * * * sudo -u apache  /usr/bin/php /data/www/default/moodle/admin/cli/adhoc_task.php --execute --keep-alive=59 >/dev/null 2>&1
 
- * * * * * /usr/bin/php  /var/www/html/moodle/admin/cli/adhoc_task.php --execute --keep-alive=59 >/dev/null
 ```
 _Moodle 4 pide un cambio en PHP se dice "max_input_vars=5000"
 ```
