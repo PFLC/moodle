@@ -54,7 +54,15 @@ MySQL Location: /usr/local/mysql
 MySQL Data Location: /usr/local/mysql/data
 MySQL Root Password: ***
 ```
-
+# UNOCONV para PDF editarlos
+```
+sudo dnf install libreoffice libreoffice-pyuno
+pip install unoconv
+nano prueba.txt
+  poner algo para probarlo y guardar
+unoconv -f pdf prueba.txt
+ls
+```
 ------- Pendiente
  
  # Instalar Moodle 4.2 via https://www.howtoforge.com/how-to-install-moodle-elearning-platform-on-rocky-linux-8/
