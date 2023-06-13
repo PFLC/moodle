@@ -25,5 +25,10 @@ sudo -u apache /usr/bin/php /data/www/default/moodle/admin/cli/maintenance.php  
 
 echo "Acceder HTTP y aceptar la actualizacion"
 echo "Cerrar el directorio solo lectura"
+echo "Aqui aveces se queda en un loope de actualizacion, reiniciar y reintentar"
+echo " No olvidar de cerrarlo"
 sudo chmod -R 755 moodle
 ```
+
+# Asegurar SSH via https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-rocky-linux-9#step-3-%E2%80%94-logging-in-to-your-rocky-linux-server-using-ssh-keys
+
