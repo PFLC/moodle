@@ -148,4 +148,12 @@ certbot renew --cert-name aula.lazarocardenas.edu.mx --webroot -w /var/lib/letse
 sudo chmod +x /etc/cron.daily/certbot-renew
 /etc/init.d/httpd  start
 
+echo "Falta modificar el CONFIG.PHP para que se refleje el https://aula..."
+
+```
+# Testing https:
+
+https://letsdebug.net
+
+
 
