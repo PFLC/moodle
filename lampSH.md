@@ -134,5 +134,18 @@ sudo dnf makecache
 # Install htop
 sudo dnf -y install htop
 ```
+# Install SSL via https://www.howtoforge.com/how-to-install-moodle-elearning-platform-on-rocky-linux-8/#step-8---install-ssl
+```
+sudo /etc/init.d/httpd stop
+sudo dnf install certbot
+sudo certbot certonly --standalone --agree-tos --no-eff-email --staple-ocsp --preferred-challenges http -m name@______.com -d moodle._____.com
+sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
+sudo nano /etc/cron.daily/certbot-renew
+///Copiar Archivo///
+#!/bin/sh
+certbot renew --cert-name aula.lazarocardenas.edu.mx --webroot -w /var/lib/letsencrypt/ --post-hook "/etc/init.d/httpd reload"
+
+sudo chmod +x /etc/cron.daily/certbot-renew
+/etc/init.d/httpd  start
 
 
