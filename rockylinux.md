@@ -129,9 +129,9 @@ sudo chmod 777  /var/www/moodledocs24a
 
 # Creacion de la BD
 mysql -u root -p
-CREATE DATABASE moodle24a DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-    create user 'moodleadmin'@'localhost' IDENTIFIED BY '!!Prepa123!!';
-    GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON moodle24a.* TO 'moodleadmin'@'localhost';
+CREATE DATABASE ________ DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+    create user '_______'@'localhost' IDENTIFIED BY '_____';
+    GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON ________.* TO '______'@'localhost';
   FLUSH PRIVILEGES;
   exit
 
