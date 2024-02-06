@@ -134,12 +134,9 @@ dnf install unoconv -y
 
 
 # MOODLE 4.x
-
-sudo mkdir /var/www/moodledocs24a
-sudo chown -R apache:apache  /var/www/moodledocs24a
-sudo chmod 777  /var/www/moodledocs24a
-
------
+sudo mkdir /var/www/html/moodle
+sudo chown -R $USER:$USER /var/www/html/moodle
+cd /var/www/html/moodle
 
 # Instalacion de Moodle 4.x via Git
 cd /var/www/html
@@ -148,5 +145,13 @@ cd moodle
 git branch -a
 git branch --track MOODLE_403_STABLE origin/MOODLE_403_STABLE 
 git checkout MOODLE_403_STABLE         
+
+sudo mkdir /var/moodledata
+sudo chown -R apache /var/moodledata
+sudo chown -R 775 /var/moodledata
+
+cd  /var/www/html/moodle
+cp config-dist.php config.php
+
 
 ```
