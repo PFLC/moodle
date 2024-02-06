@@ -31,6 +31,8 @@ sudo firewall-cmd --reload
 
 # MariaDB REPO WIZARD a actualizar, MOODLE requiere 10.06 o superior.
 # https://mariadb.org/download/?t=repo-config&d=CentOS+Stream&v=10.11&r_m=xtom_fre
+
+nano /etc/yum.repos.d/MariaDB.repo
 ---- Generado con el Wizard ------
 # MariaDB 10.11 CentOS repository list - created 2024-02-04 01:46 UTC
 # https://mariadb.org/download/
@@ -47,7 +49,7 @@ gpgcheck = 1
 
 
 
-sudo yum install mariadb mariadb-client mariadb-server httpd php php-mysql php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap -y
+sudo yum install git MariaDB MariaDB-client mariadb-server httpd php php-mysql php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap -y
 
 sudo systemctl enable --now mariadb
 
@@ -63,7 +65,7 @@ dnf install php-soap
 dnf install php-ctype
 dnf install php-zlib
 dnf install php-simplexml
-dnf install php-redis
+dnf install php-redis -y
 dnf install php-spl
 
 dnf install php-pcre
@@ -93,14 +95,14 @@ sudo systemctl start mariadb
 sudo systemctl enable mariadb.service
 
 
-sudo mysql_secure_installation
+sudo mariadb-secure-installation 
 
-
+nano /etc/php.ini
 # The behaviour of these functions is affected by settings in php.ini.
 # https://bizanosa.com/moodle-server-requirements/
 #
-#date.timezone = "UTC"  
-#memory_limit=128M
+date.timezone = "UTC"  
+#memory_limit=256M
 #file_uploads=ON
 #zend_extension=/full/path/to/opcache.so
 
@@ -118,6 +120,18 @@ opcache.enable_file_override = 0
 ///////////////////////////////
 
 
+# Creacion de la BD
+mysql -u root -p
+CREATE DATABASE ________ DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+    create user '_______'@'localhost' IDENTIFIED BY '_____';
+    GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON ________.* TO '______'@'localhost';
+  FLUSH PRIVILEGES;
+  exit
+------
+
+cd
+dnf install unoconv -y
+
 
 # MOODLE 4.x
 
@@ -127,15 +141,6 @@ sudo chmod 777  /var/www/moodledocs24a
 
 -----
 
-# Creacion de la BD
-mysql -u root -p
-CREATE DATABASE ________ DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-    create user '_______'@'localhost' IDENTIFIED BY '_____';
-    GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON ________.* TO '______'@'localhost';
-  FLUSH PRIVILEGES;
-  exit
-
----
 # Instalacion de Moodle 4.x via Git
 cd /var/www
 git clone git://git.moodle.org/moodle.git
