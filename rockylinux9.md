@@ -29,7 +29,7 @@ sudo firewall-cmd --reload
 #Command to install additional packages (xxx for SAPI or extension name):
 #    dnf install php-xxx
 
-# MariaDB REPO WIZARD a actualizar
+# MariaDB REPO WIZARD a actualizar, MOODLE requiere 10.06 o superior.
 # https://mariadb.org/download/?t=repo-config&d=CentOS+Stream&v=10.11&r_m=xtom_fre
 ---- Generado con el Wizard ------
 # MariaDB 10.11 CentOS repository list - created 2024-02-04 01:46 UTC
