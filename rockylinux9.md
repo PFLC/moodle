@@ -142,7 +142,7 @@ sudo chmod 777  /var/www/moodledocs24a
 -----
 
 # Instalacion de Moodle 4.x via Git
-cd /var/www
+cd /var/www/html
 git clone git://git.moodle.org/moodle.git
 cd moodle
 git branch -a
