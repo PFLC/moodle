@@ -149,9 +149,9 @@ git checkout MOODLE_403_STABLE
 # ---- Importante y puede causar frustracion los permisos -----
 chown -R apache:apache /var/www/html/moodle/
 chmod -R 755 /var/www/html/moodle/
-mkdir /var/www/moodledata24a
-chown -R apache:apache /var/www/moodledata24a
-chmod -R 755 /var/www/moodledata24a
+mkdir /var/www/moodledata
+chown -R apache:apache /var/www/moodledata
+chmod -R 755 /var/www/moodledata
 
 # ----
 cd  /var/www/html/moodle
