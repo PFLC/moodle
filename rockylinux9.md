@@ -154,7 +154,7 @@ chown -R apache:apache /var/www/moodledata
 chmod -R 755 /var/www/moodledata
 
 # ----
-cd  /var/www/html/moodle
+#[make Favicons](https://favicon.io/favicon-converter/)https://favicon.io/favicon-converter/
 
 
 ```
