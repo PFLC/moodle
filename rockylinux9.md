@@ -74,7 +74,7 @@ dnf install php-xml
 dnf install php-xmlreader
 
 dnf install php-intl -y
-
+dnf install php-pecl-apcu -y
 dnf install php-json
 dnf install php-hash
 dnf install php-fileinfo
