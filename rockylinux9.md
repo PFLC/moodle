@@ -146,12 +146,15 @@ git branch -a
 git branch --track MOODLE_403_STABLE origin/MOODLE_403_STABLE 
 git checkout MOODLE_403_STABLE         
 
-sudo mkdir /var/moodledata
-sudo chown -R apache /var/moodledata
-sudo chown -R 775 /var/moodledata
+# ---- Importante y puede causar frustracion los permisos -----
+chown -R apache:apache /var/www/html/moodle/
+chmod -R 755 /var/www/html/moodle/
+mkdir /var/www/moodledata24a
+chown -R apache:apache /var/www/moodledata24a
+chmod -R 755 /var/www/moodledata24a
 
+# ----
 cd  /var/www/html/moodle
-cp config-dist.php config.php
 
 
 ```
