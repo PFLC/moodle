@@ -1,12 +1,5 @@
 ![moodlerl9.png](https://github.com/PFLC/moodle/blob/main/images/moodlerl9.png)
 
-# REFERENCIAS
-[https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/](https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/)
-[https://www.cyberciti.biz/faq/disable-selinux-on-centos-7-rhel-7-fedora-linux/](https://www.cyberciti.biz/faq/disable-selinux-on-centos-7-rhel-7-fedora-linux/)
-[https://docs.moodle.org/403/en/Git_for_Administrators](https://docs.moodle.org/403/en/Git_for_Administrators)
-[https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/](https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/)
-[https://installati.one/install-aspell-devel-rockylinux-8/](https://linux-packages.com)
-
 
 
 ```bash
@@ -164,3 +157,10 @@ chmod -R 755 /var/www/moodledata
 
 
 ```
+
+# REFERENCIAS
+>[https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/](https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/)
+>[https://www.cyberciti.biz/faq/disable-selinux-on-centos-7-rhel-7-fedora-linux/](https://www.cyberciti.biz/faq/disable-selinux-on-centos-7-rhel-7-fedora-linux/)
+>[https://docs.moodle.org/403/en/Git_for_Administrators](https://docs.moodle.org/403/en/Git_for_Administrators)
+>[https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/](https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/)
+>[https://installati.one/install-aspell-devel-rockylinux-8/](https://linux-packages.com)
