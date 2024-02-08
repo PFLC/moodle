@@ -131,12 +131,6 @@ CREATE DATABASE ________ DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_c
 cd
 dnf install unoconv -y
 
-
-# MOODLE 4.x
-sudo mkdir /var/www/html/moodle
-sudo chown -R $USER:$USER /var/www/html/moodle
-cd /var/www/html/moodle
-
 # Instalacion de Moodle 4.x via Git
 cd /var/www/html
 git clone git://git.moodle.org/moodle.git
@@ -152,7 +146,10 @@ mkdir /var/www/moodledata
 chown -R apache:apache /var/www/moodledata
 chmod -R 755 /var/www/moodledata
 
-# ----
+# Otros soportes de Moodle
+dnf --enablerepo=crb install aspell
+
+# ---- Para FavIcons buen sitio 
 #[make Favicons](https://favicon.io/favicon-converter/)https://favicon.io/favicon-converter/
 
 
@@ -164,3 +161,5 @@ chmod -R 755 /var/www/moodledata
 >[https://docs.moodle.org/403/en/Git_for_Administrators](https://docs.moodle.org/403/en/Git_for_Administrators)
 >[https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/](https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/)
 >[https://installati.one/install-aspell-devel-rockylinux-8/](https://linux-packages.com)
+>https://rockylinux.pkgs.org/9/rockylinux-crb-x86_64/aspell-0.60.8-8.el9.0.1.x86_64.rpm.html
+
