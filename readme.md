@@ -156,10 +156,16 @@ dnf --enablerepo=crb install aspell
 ```
 
 # REFERENCIAS
->[https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/](https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/)
->[https://www.cyberciti.biz/faq/disable-selinux-on-centos-7-rhel-7-fedora-linux/](https://www.cyberciti.biz/faq/disable-selinux-on-centos-7-rhel-7-fedora-linux/)
->[https://docs.moodle.org/403/en/Git_for_Administrators](https://docs.moodle.org/403/en/Git_for_Administrators)
->[https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/](https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/)
->[https://installati.one/install-aspell-devel-rockylinux-8/](https://linux-packages.com)
->https://rockylinux.pkgs.org/9/rockylinux-crb-x86_64/aspell-0.60.8-8.el9.0.1.x86_64.rpm.html
+[https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/](https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/)
+
+[https://www.cyberciti.biz/faq/disable-selinux-on-centos-7-rhel-7-fedora-linux/](https://www.cyberciti.biz/faq/disable-selinux-on-centos-7-rhel-7-fedora-linux/)
+
+[https://docs.moodle.org/403/en/Git_for_Administrators](https://docs.moodle.org/403/en/Git_for_Administrators)
+
+[https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/](https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/)
+
+[https://installati.one/install-aspell-devel-rockylinux-8/](https://linux-packages.com)
+
+https://rockylinux.pkgs.org/9/rockylinux-crb-x86_64/aspell-0.60.8-8.el9.0.1.x86_64.rpm.html
+
 
