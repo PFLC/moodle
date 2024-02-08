@@ -1,11 +1,14 @@
+
+# REFERENCIAS
+[https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/](https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/)
+[https://www.cyberciti.biz/faq/disable-selinux-on-centos-7-rhel-7-fedora-linux/](https://www.cyberciti.biz/faq/disable-selinux-on-centos-7-rhel-7-fedora-linux/)
+[https://docs.moodle.org/403/en/Git_for_Administrators](https://docs.moodle.org/403/en/Git_for_Administrators)
+[https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/](https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/)
+[https://installati.one/install-aspell-devel-rockylinux-8/](https://linux-packages.com)
+
+
+
 ```bash
-https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/
-https://www.cyberciti.biz/faq/disable-selinux-on-centos-7-rhel-7-fedora-linux/
-https://docs.moodle.org/403/en/Git_for_Administrators
-https://webhostinggeeks.com/howto/how-to-install-lamp-on-centos-7/
-
-
-
 #Disabling SELinux permanently
 # Edit the /etc/selinux/config file, run:
 sudo vi /etc/selinux/config
@@ -46,8 +49,10 @@ gpgkey = https://mirrors.xtom.com/mariadb/yum/RPM-GPG-KEY-MariaDB
 gpgcheck = 1
 ------------------------------------
 
-
-
+# RESTART PHP de haber modificaciones MAX_SIZE, Etc
+# Puede editar el archivo PHP.INI y cambiar a (por ejemplo) upload_max_filesize = 1000M , post_max_size = 1000M y max_execution_time = 600 .
+sudo systemctl restart php-fpm
+-------------
 
 sudo yum install git MariaDB MariaDB-client mariadb-server httpd php php-mysql php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap -y
 
