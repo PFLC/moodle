@@ -22,6 +22,8 @@ sudo dnf module enable php:remi-8.3 -y
 sudo dnf install -y php php-cli php-common
 
 # Configurar el repositorio de MariaDB para obtener una versión compatible con Moodle 4.x, que requiere MariaDB 10.2 o superior
+# MariaDB REPO WIZARD a actualizar, MOODLE requiere 10.06 o superior.
+# https://mariadb.org/download/?t=repo-config&d=CentOS+Stream&v=10.11&r_m=xtom_fre
 sudo tee /etc/yum.repos.d/MariaDB.repo <<EOF
 # MariaDB 10.11 CentOS repository list
 [mariadb]
@@ -49,7 +51,9 @@ sudo mariadb-secure-installation
 # Configurar ajustes recomendados para Moodle en php.ini, como zona horaria, límites de memoria y configuración de OPcache
 sudo sed -i 's/;date.timezone =.*/date.timezone = "UTC"/' /etc/php.ini
 sudo sed -i 's/;opcache.enable=.*/opcache.enable=1/' /etc/php.ini
-sudo sed -i 's/;opcache.memory_consumption=.*/opcache.memory_consumption=128/' /etc/php.ini
+sudo sed -i 's/^\s*;\?\s*max_input_vars\s*=.*/max_input_vars = 5000/' /etc/php.ini
+
+sudo sed -i 's/;opcache.memory_consumption=.*/opcache.memory_consumption=512/' /etc/php.ini
 sudo sed -i 's/;opcache.max_accelerated_files=.*/opcache.max_accelerated_files=10000/' /etc/php.ini
 sudo sed -i 's/;opcache.revalidate_freq=.*/opcache.revalidate_freq=2/' /etc/php.ini
 sudo systemctl restart php-fpm
@@ -108,8 +112,6 @@ sudo firewall-cmd --reload
 #Command to install additional packages (xxx for SAPI or extension name):
 #    dnf install php-xxx
 
-# MariaDB REPO WIZARD a actualizar, MOODLE requiere 10.06 o superior.
-# https://mariadb.org/download/?t=repo-config&d=CentOS+Stream&v=10.11&r_m=xtom_fre
 
 nano /etc/yum.repos.d/MariaDB.repo
 ---- Generado con el Wizard ------
@@ -236,6 +238,123 @@ dnf --enablerepo=crb install aspell
 
 
 ```
+# Instalacion por Consola
+
+```bash
+cd /www/html/moodle/admin/cli
+sudo php install.php
+                                 .-..-.
+   _____                         | || |
+  /____/-.---_  .---.  .---.  .-.| || | .---.
+  | |  _   _  |/  _  \/  _  \/  _  || |/  __ \
+  * | | | | | || |_| || |_| || |_| || || |___/
+    |_| |_| |_|\_____/\_____/\_____||_|\_____)
+
+Moodle 4.3.3+ (Build: 20240215) command line installation program
+-------------------------------------------------------------------------------
+== Choose a language ==
+en - English (en)
+? - Available language packs
+type value, press Enter to use default value (en)
+:
+-------------------------------------------------------------------------------
+== Data directories permission ==
+type value, press Enter to use default value (2777)
+:
+-------------------------------------------------------------------------------
+== Web address ==
+type value
+: http://192.168.100.59/moodle
+-------------------------------------------------------------------------------
+== Data directory ==
+type value, press Enter to use default value (/var/www/moodledata)
+:
+-------------------------------------------------------------------------------
+== Choose database driver ==
+ mysqli
+ auroramysql
+ mariadb
+type value, press Enter to use default value (mysqli)
+: mariadb
+-------------------------------------------------------------------------------
+== Database host ==
+type value, press Enter to use default value (localhost)
+:
+-------------------------------------------------------------------------------
+== Database name ==
+type value, press Enter to use default value (moodle)
+:
+-------------------------------------------------------------------------------
+== Tables prefix ==
+type value, press Enter to use default value (mdl_)
+:
+-------------------------------------------------------------------------------
+== Database port ==
+type value, press Enter to use default value ()
+:
+-------------------------------------------------------------------------------
+== Unix socket ==
+type value, press Enter to use default value ()
+:
+-------------------------------------------------------------------------------
+== Database user ==
+type value, press Enter to use default value (root)
+: moodleuser
+-------------------------------------------------------------------------------
+== Database password ==
+type value
+: !!Prepa123!!
+-------------------------------------------------------------------------------
+== Full site name ==
+type value
+: PFLC 2 Lomas Virreyes
+-------------------------------------------------------------------------------
+== Short name for site (eg single word) ==
+type value
+: PFLC2
+-------------------------------------------------------------------------------
+== Admin account username ==
+type value, press Enter to use default value (admin)
+:
+-------------------------------------------------------------------------------
+== New admin user password ==
+type value
+: !!Prepa123!!
+-------------------------------------------------------------------------------
+== New admin user email address ==
+type value, press Enter to use default value ()
+: moodle@pflc2.edu.mx
+-------------------------------------------------------------------------------
+== Support email address ==
+type value, press Enter to use default value ()
+:
+-------------------------------------------------------------------------------
+== Upgrade key (leave empty to not set it) ==
+type value
+:
+-------------------------------------------------------------------------------
+== Copyright notice ==
+Moodle  - Modular Object-Oriented Dynamic Learning Environment
+Copyright (C) 1999 onwards Martin Dougiamas (https://moodle.com)
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+See the Moodle License information page for full details: https://moodledev.io/general/license
+
+Have you read these conditions and understood them?
+type y (means yes) or n (means no)
+: yes
+Incorrect value, please retry
+type y (means yes) or n (means no)
+: y
+-------------------------------------------------------------------------------
+== Setting up database ==
+-->System
+++ install.xml: Success (24.73 seconds) ++
+++ xmldb_main_install: Success (9.62 seconds) ++
+++ external_update_descriptions: Success (4.27 seconds) ++
 
 # REFERENCIAS
 [https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/](https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/)
