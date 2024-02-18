@@ -1,10 +1,6 @@
 ![moodlerl9.png](https://github.com/PFLC/moodle/blob/main/images/moodlerl9.png)
 
 
-
-```bash
-Tu script bash para instalar Moodle 4.x en un sistema basado en CentOS/RHEL ya tiene una estructura bastante sólida, pero puedo sugerir algunas optimizaciones y proporcionar explicaciones para cada sección o línea de código relevante:
-
 ```bash
 # Deshabilitar SELinux de forma permanente para evitar conflictos con permisos de Moodle
 sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
