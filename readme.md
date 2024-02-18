@@ -355,6 +355,7 @@ type y (means yes) or n (means no)
 ++ install.xml: Success (24.73 seconds) ++
 ++ xmldb_main_install: Success (9.62 seconds) ++
 ++ external_update_descriptions: Success (4.27 seconds) ++
+```
 
 # REFERENCIAS
 [https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/](https://ciq.com/blog/how-to-install-the-phpmyadmin-web-based-mysql-or-mariadb-gui-on-rocky-linux/)
