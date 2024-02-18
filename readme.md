@@ -3,6 +3,92 @@
 
 
 ```bash
+Tu script bash para instalar Moodle 4.x en un sistema basado en CentOS/RHEL ya tiene una estructura bastante sólida, pero puedo sugerir algunas optimizaciones y proporcionar explicaciones para cada sección o línea de código relevante:
+
+```bash
+# Deshabilitar SELinux de forma permanente para evitar conflictos con permisos de Moodle
+sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
+
+# Actualizar todos los paquetes del sistema para asegurar que estén al día
+sudo dnf update -y
+
+# Configurar el firewall para permitir el tráfico HTTP y HTTPS, necesario para acceder a Moodle a través de la web
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --reload
+
+# Instalar el repositorio Remi para obtener versiones más recientes de PHP
+sudo dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+
+# Instalar PHP desde el repositorio Remi, Moodle 4.x requiere PHP 7.3 o superior
+sudo dnf module reset php
+sudo dnf module enable php:remi-8.3 -y
+sudo dnf install -y php php-cli php-common
+
+# Configurar el repositorio de MariaDB para obtener una versión compatible con Moodle 4.x, que requiere MariaDB 10.2 o superior
+sudo tee /etc/yum.repos.d/MariaDB.repo <<EOF
+# MariaDB 10.11 CentOS repository list
+[mariadb]
+name = MariaDB
+baseurl = https://mirrors.xtom.com/mariadb/yum/10.11/centos/\$releasever/\$basearch
+gpgkey = https://mirrors.xtom.com/mariadb/yum/RPM-GPG-KEY-MariaDB
+gpgcheck = 1
+EOF
+
+# Reiniciar PHP-FPM si ya está instalado, útil para aplicar cambios en la configuración de PHP
+sudo systemctl restart php-fpm
+
+# Instalar paquetes necesarios para Moodle y sus dependencias, incluyendo servidor web, base de datos y extensiones PHP
+sudo dnf install -y git mariadb mariadb-server httpd php-mysqlnd php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap curl unzip
+
+# Habilitar y arrancar los servicios de MariaDB y Apache (httpd)
+sudo systemctl enable --now mariadb httpd
+
+# Instalar extensiones PHP adicionales requeridas por Moodle
+sudo dnf install -y php-zip php-sodium php-iconv php-curl php-openssl php-tokenizer php-soap php-ctype php-zlib php-simplexml php-intl php-pecl-apcu php-json php-dom php-xmlreader php-xml php-mbstring
+
+# Ejecutar el script de seguridad de MariaDB para establecer la contraseña del root, eliminar cuentas anónimas, deshabilitar el login root remoto y eliminar la base de datos test
+sudo mariadb-secure-installation
+
+# Configurar ajustes recomendados para Moodle en php.ini, como zona horaria, límites de memoria y configuración de OPcache
+sudo sed -i 's/;date.timezone =.*/date.timezone = "UTC"/' /etc/php.ini
+sudo sed -i 's/;opcache.enable=.*/opcache.enable=1/' /etc/php.ini
+sudo sed -i 's/;opcache.memory_consumption=.*/opcache.memory_consumption=128/' /etc/php.ini
+sudo sed -i 's/;opcache.max_accelerated_files=.*/opcache.max_accelerated_files=10000/' /etc/php.ini
+sudo sed -i 's/;opcache.revalidate_freq=.*/opcache.revalidate_freq=2/' /etc/php.ini
+sudo systemctl restart php-fpm
+
+# Crear la base de datos de Moodle
+mysql -u root -p -e "CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; CREATE USER 'moodleuser'@'localhost' IDENTIFIED BY 'password'; GRANT ALL PRIVILEGES ON moodle.* TO 'moodleuser'@'localhost'; FLUSH PRIVILEGES;"
+
+# Instalar unoconv para la conversión de documentos, opcional pero recomendado para Moodle
+sudo dnf install -y unoconv
+
+# Clonar la última versión estable de Moodle desde su repositorio Git
+cd /var/www/html
+sudo git clone git://git.moodle.org/moodle.git
+cd moodle
+sudo git branch -a
+sudo git branch --track MOODLE_
+
+403_STABLE origin/MOODLE_403_STABLE
+sudo git checkout MOODLE_403_STABLE
+
+# Establecer los permisos adecuados para los directorios de Moodle
+sudo chown -R apache:apache /var/www/html/moodle
+sudo chmod -R 755 /var/www/html/moodle
+sudo mkdir /var/www/moodledata
+sudo chown -R apache:apache /var/www/moodledata
+sudo chmod -R 777 /var/www/moodledata
+
+# Instalar soporte adicional de Moodle, como aspell para la revisión ortográfica
+sudo dnf --enablerepo=crb install -y aspell
+```
+----
+
+
+
+```bash
 #Disabling SELinux permanently
 # Edit the /etc/selinux/config file, run:
 sudo vi /etc/selinux/config
