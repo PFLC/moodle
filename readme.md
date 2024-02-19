@@ -51,12 +51,17 @@ sudo mariadb-secure-installation
 # Configurar ajustes recomendados para Moodle en php.ini, como zona horaria, límites de memoria y configuración de OPcache
 sudo sed -i 's/;date.timezone =.*/date.timezone = "UTC"/' /etc/php.ini
 sudo sed -i 's/;opcache.enable=.*/opcache.enable=1/' /etc/php.ini
+
 sudo sed -i 's/^\s*;\?\s*max_input_vars\s*=.*/max_input_vars = 5000/' /etc/php.ini
+sudo sed -i 's/^\s*;\?\s*post_max_size\s*=.*/post_max_size = 100M/' /etc/php.ini
+sudo sed -i 's/^\s*;\?\s*upload_max_filesize\s*=.*/upload_max_filesize = 100M/' /etc/php.ini
+sudo sed -i 's/^\s*;\?\s*max_execution_time\s*=.*/max_execution_time = 600/' /etc/php.ini
 
 sudo sed -i 's/;opcache.memory_consumption=.*/opcache.memory_consumption=512/' /etc/php.ini
 sudo sed -i 's/;opcache.max_accelerated_files=.*/opcache.max_accelerated_files=10000/' /etc/php.ini
 sudo sed -i 's/;opcache.revalidate_freq=.*/opcache.revalidate_freq=2/' /etc/php.ini
 sudo systemctl restart php-fpm
+sudo systemctl restart httpd
 
 # Crear la base de datos de Moodle
 mysql -u root -p -e "CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; CREATE USER 'moodleuser'@'localhost' IDENTIFIED BY 'password'; GRANT ALL PRIVILEGES ON moodle.* TO 'moodleuser'@'localhost'; FLUSH PRIVILEGES;"
