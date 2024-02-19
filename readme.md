@@ -88,11 +88,15 @@ sudo chmod -R 777 /var/www/moodledata
 
 # Instalar soporte adicional de Moodle, como aspell para la revisión ortográfica
 sudo dnf --enablerepo=crb install -y aspell
+
+# cronjob de mantenimineto
+(crontab -l | grep -q 'admin/cli/cron.php') || wwdww(crontab -l; echo "* * * * * /usr/bin/php /var/etc/wwwQaa                                                                                                                                                                                                    a/moodle/admin/cli/cron.php >/dev/null 2>&1") | crontab -
+
 ```
 ----
 
 
-
+                                                                                  
 ```bash
 #Disabling SELinux permanently
 # Edit the /etc/selinux/config file, run:
